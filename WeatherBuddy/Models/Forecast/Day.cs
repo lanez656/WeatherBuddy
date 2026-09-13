@@ -1,9 +1,9 @@
 namespace WeatherBuddy.Models.Forecast;
 
-public class Day(string name, int weatherCode, int tempMax, int tempMin)
+public class Day(string date, int weatherCode, double tempMax, double tempMin)
 {
-    public string Name {get; set;} = name;
+    public string Date {get; set;} = date;
     public int WeatherCode {get; set;} = weatherCode;
-    public int TempMax {get; set;} = tempMax;
-    public int TempMin {get; set;} = tempMin;
+    public double TempMax {get; set;} = tempMax;
+    public double TempMin {get; set;} = tempMin;
 }

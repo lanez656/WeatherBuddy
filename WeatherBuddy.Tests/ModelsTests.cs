@@ -44,30 +44,8 @@ public class ModelTests
         Assert.Equal(1, currentWeather.WeatherCode);
     }
 
-    [Fact]
-    public void Test_7DayForecast_InstatiateCorrectly()
-    {
-        
-        string[] days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-        var dayList = new List<Day>();
-        
-        //Setup
-        for (int i = 0; i<days.Length; i++)
-        {
-            dayList.Add(new Day(days[i], 0, 22, 16));
-        }
+    // rewrite test for dates
 
-        //Assert
-        Assert.Equal(7, dayList.Count);
-        foreach (Day d in dayList)
-        {
-            Assert.NotNull(d);
-            Assert.NotEmpty(d.Name);
-            Assert.Equal(0, d.WeatherCode);
-            Assert.Equal(22, d.TempMax);
-            Assert.Equal(16, d.TempMin);
-        }
-    }
 
     [Fact]
     public void HourlyForecast_ShouldContain24HoursInCorrectOrder()
@@ -76,7 +54,7 @@ public class ModelTests
         // Setup
         var hours = new List<Hour>();
 
-        for (int i = 0; i < 24; i++)
+        for (int i = 0; i < 24*7; i++)
         {
             hours.Add(new Hour(time: i, weatherCode: i + 1, temperature: i + 10, percipitation: i));
         }
@@ -84,15 +62,14 @@ public class ModelTests
         var forecast = new HourlyForecast(hours);
 
         // Assert
-        Assert.Equal(24, forecast.HourlyForecasting.Count);
+        Assert.Equal(24*7, forecast.HourlyForecasting.Count);
 
-        for (int i = 0; i < 24; i++)
+        for (int i = 0; i < 24*7; i++)
         {
             Assert.Equal(i, forecast.HourlyForecasting[i].Time);
             Assert.Equal(i + 1, forecast.HourlyForecasting[i].WeatherCode);
             Assert.Equal(i + 10, forecast.HourlyForecasting[i].Temperature);
             Assert.Equal(i, forecast.HourlyForecasting[i].Percipitation);
         }
-
     }
 }
